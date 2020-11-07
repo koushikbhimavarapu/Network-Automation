@@ -8,13 +8,10 @@
   tasks:
     - name: installing nginx, php, php-fpm
       apt:
-        name: "{{item}}"
+        name: ['nginx', 'php', 'php-fpm']
         state: latest
         update_cache: yes
-      with_items:
-        - nginx
-        - php
-        - php-fpm
+      
       when: ansible_os_family == "Debian"
 
     - name: changing the template
@@ -47,8 +44,21 @@
       template:
         src: haproxy.cfg.j2
         dest: /etc/haproxy/haproxy.cfg
-          
+
     - name: To restart HAPROXY
       service:
         name: haproxy
         state: restarted
+
+    - name: Rudimentary template
+      template:
+        src:  rudimentary_test.sh.j2
+        dest: $HOME/rudimentary_test.sh
+
+    - name: Rudimentary test function
+      command:  bash $HOME/rudimentary_test.sh
+      register: test
+      args:
+        warn: no
+    - debug:
+        msg:  "{{test.stdout}}"
