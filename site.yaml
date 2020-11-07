@@ -28,7 +28,7 @@
         dest: "{{root_path}}/{{index_format}}"
 
 
-    - name: service restarts
+    - name: service of nginx restarts
       service:
         name: nginx
         state: restarted
@@ -37,9 +37,18 @@
 - hosts: haproxy
   become: yes
   tasks:
-    - name : Installation of HAPROXY
+    - name: Installation of HAPROXY
       apt:
         name: haproxy
         update_cache: yes
         state: latest
-        
+
+    - name: changing the haproxy config
+      template:
+        src: haproxy.cfg.j2
+        dest: /etc/haproxy/haproxy.cfg
+          
+    - name: To restart HAPROXY
+      service:
+        name: haproxy
+        state: restarted
