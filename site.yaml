@@ -26,9 +26,20 @@
       copy:
         src: "./{{index_format}}"
         dest: "{{root_path}}/{{index_format}}"
-      
- 
+
+
     - name: service restarts
       service:
         name: nginx
         state: restarted
+
+
+- hosts: haproxy
+  become: yes
+  tasks:
+    - name : Installation of HAPROXY
+      apt:
+        name: haproxy
+        update_cache: yes
+        state: latest
+        
