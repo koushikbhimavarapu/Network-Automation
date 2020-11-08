@@ -1,3 +1,5 @@
+                                              Network-Automation
+
 1) The task is to automate the process of installation of webservers and load balancing them using the Automation tool - Ansible
 
 2) First step is to make a secure connection between the host machine and servers. This is done by using SSH-config file.
