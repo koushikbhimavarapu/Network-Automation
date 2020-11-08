@@ -1,6 +1,6 @@
 1) The task is to automate the process of installation of webservers and load balancing them using the Automation tool - Ansible
 
-2) First step is to make a secure connection between the host machine and servers. This is done by using SSH-config file
+2) First step is to make a secure connection between the host machine and servers. This is done by using SSH-config file.
 
 3) The config file is written in such a way that, if we connect to bastion, we can SSH to all the other hosts in the site local network.
 
