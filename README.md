@@ -8,7 +8,7 @@
 
 5) The HAproxy device will act as an entry point for the service.
 
-6) Then using ansible all three webservers devA,devB,devC are installed along with HAproxy.
+6) Then using ansible all three webservers devA, devB ,devC are installed along with HAproxy.
 
 7) Later, the configurations are changed in such a way that the webservers should give us a simple service that displays the hostname, ipaddress of the host.
 
