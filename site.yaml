@@ -1,6 +1,7 @@
 ---
 - hosts: webservers
   become: yes
+  gather_facts: yes
   vars:
     root_path: /var/www/html
     index_format: index.php
@@ -11,7 +12,7 @@
         name: ['nginx', 'php', 'php-fpm']
         state: latest
         update_cache: yes
-      
+
       when: ansible_os_family == "Debian"
 
     - name: changing the template
@@ -33,12 +34,14 @@
 
 - hosts: haproxy
   become: yes
+  gather_facts: yes
   tasks:
     - name: Installation of HAPROXY
       apt:
         name: haproxy
         update_cache: yes
         state: latest
+      when: ansible_os_family == "Debian"
 
     - name: changing the haproxy config
       template:
