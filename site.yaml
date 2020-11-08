@@ -12,7 +12,6 @@
         name: ['nginx', 'php', 'php-fpm']
         state: latest
         update_cache: yes
-
       when: ansible_os_family == "Debian"
 
     - name: changing the template
