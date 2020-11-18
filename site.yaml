@@ -5,6 +5,7 @@
   vars:
     root_path: /var/www/html
     index_format: index.php
+    http_port: "80"
 
   tasks:
     - name: installing nginx, php, php-fpm
@@ -13,6 +14,15 @@
         state: latest
         update_cache: yes
       when: ansible_os_family == "Debian"
+      
+    - name: Removing apache2 packages
+      apt:
+        name: apache2
+        state: absent
+        purge: yes
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+
 
     - name: changing the template
       template:
@@ -23,6 +33,12 @@
       copy:
         src: "./{{index_format}}"
         dest: "{{root_path}}/{{index_format}}"
+        
+    - name: To allow HTTP on port 80
+      ufw:
+        rule: allow
+        port: "{{http_port}}"
+        proto: tcp
 
 
     - name: service of nginx restarts
